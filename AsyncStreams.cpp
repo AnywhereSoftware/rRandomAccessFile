@@ -8,8 +8,10 @@ namespace B4R {
 		if (me->stream->wrappedClient != NULL) {
 			if (me->stream->wrappedClient->connected() == false) {
 				me->Close();
-				if (me->ErrorSub != NULL)
+				if (me->ErrorSub != NULL) {
+					sender->wrapPointer(me);
 					me->ErrorSub();
+				}
 				return;
 			}
 			#ifdef ESP_H
