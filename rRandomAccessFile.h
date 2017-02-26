@@ -1,7 +1,7 @@
 #pragma once
 #include "B4RDefines.h"
 
-//~version: 1.60
+//~version: 1.80
 namespace B4R {
 	class SplitIterator;
 	/**
@@ -180,14 +180,17 @@ namespace B4R {
 			B4RStream* stream;
 			void Close();
 			static void checkForData(void* b);
+			bool prefixMode;
+			bool bigEndian;
 		public:
 			//The internal buffer limit. The NewData event will be raised when the buffer reaches this size or if no more data is available.
 			//The data is stored in the stack buffer. Make sure that #StackBufferSize is large enough.
 			UInt MaxBufferSize = 100;
 			//Number of milliseconds to wait for new data (when there is at least one byte available).
-			Byte WaitForMoreDataDelay = 5;
+			UInt WaitForMoreDataDelay = 5;
 			//Initializes the object and set the subs that will handle the events.
 			void Initialize (B4RStream* Stream, SubVoidArray NewDataSub, SubVoidVoid ErrorSub);
+			void InitializePrefix (B4RStream* Stream, bool BigEndian, SubVoidArray NewDataSub, SubVoidVoid ErrorSub);
 			//Writes the array to the stream.
 			AsyncStreams* Write (ArrayByte* Data);
 			//Writes the array to the stream. 
