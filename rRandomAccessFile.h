@@ -190,6 +190,11 @@ namespace B4R {
 			UInt WaitForMoreDataDelay = 5;
 			//Initializes the object and set the subs that will handle the events.
 			void Initialize (B4RStream* Stream, SubVoidArray NewDataSub, SubVoidVoid ErrorSub);
+			//Initializes the object in prefix mode. Both sides of the connection must adhere to the "prefix" protocol.
+			//It is recommended to set #StackBufferSize to 600 or more.
+			//MaxBufferSize will be set to 500 bytes and WaitForMoreDataDelay will be set to 300ms.
+			//BigEndian - Sets the length prefix endianess. 
+			
 			void InitializePrefix (B4RStream* Stream, bool BigEndian, SubVoidArray NewDataSub, SubVoidVoid ErrorSub);
 			//Writes the array to the stream.
 			AsyncStreams* Write (ArrayByte* Data);
